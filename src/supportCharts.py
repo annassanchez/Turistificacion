@@ -95,6 +95,7 @@ def chart_boxplot(dataframe):
     param: dataframe
     """
     print('numeric variables distribution -> outliers')
+    dataframe = dataframe.select_dtypes(include = np.number)
     fig, ax = plt.subplots(dataframe.shape[1], 1, figsize=(25, 2.5 * dataframe.shape[1]))
 
     for i in range(len(dataframe.columns)):
