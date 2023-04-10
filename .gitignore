@@ -131,3 +131,6 @@ dmypy.json
 *.gz
 test.ipynb
 airbnb_airdna/
+
+# ignore large .gpkg files
+*.gpkg
