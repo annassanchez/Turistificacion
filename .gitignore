@@ -134,3 +134,6 @@ airbnb_airdna/
 
 # ignore large .gpkg files
 *.gpkg
+
+# ignore unused crawler
+sc_fotocasa/
