@@ -270,7 +270,7 @@ def seleniumFotocasa_page5(url, dict_, page_input):
                         address = ''  
                         break  
                     try:
-                        owner = driver.find_element(By.XPATH, f'/html/body/div[1]/div[1]/div[2]/main/div/div[2]/section/article[{i}]/div/div[1]/a/img]')#.get_attribute('alt')
+                        owner = driver.find_element(By.XPATH, f'/html/body/div[1]/div[1]/div[2]/main/div/div[2]/section/article[3]/div/div[1]/a').get_attribute('href')
                                                             #/html/body/div[1]/div[1]/div[2]/main/div/div[2]/section/article[1]/div[1]/div/a/img
                     except:
                         owner = '' 
@@ -310,6 +310,11 @@ def seleniumFotocasa_page5(url, dict_, page_input):
     finally:
         driver.quit()
 
+def scrapeoFotocasa(url,listings, page):
+    if page < 5:
+        seleniumFotocasa2(url, listings, page)
+    else:
+        seleniumFotocasa_page5(url, listings, page)
 
 def seleniumFotocasaPagina(url, dict_):
     driver = webdriver.Firefox(options=options)
