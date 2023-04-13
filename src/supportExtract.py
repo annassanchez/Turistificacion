@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import xmltodict
 import json
+import pickle
 pd.set_option('display.max_columns', None)
 
 def extractHotels():
@@ -12,10 +13,12 @@ def extractHotels():
     - Further extract the information for categories cat1_num, cod1_txt, cat2_num, cod2_txt, cat3_num, and cod3_txt from the sub-dictionaries of 'categorias' in the original data
     """
     ## getting the datatrame from the api
+    print('calling API')
     url_hotels = 'https://www.esmadrid.com/opendata/alojamientos_v1_es.xml'
     res_hotels = requests.get(url_hotels)
     df_hotels = pd.DataFrame(xmltodict.parse(res_hotels.text)['serviceList']['service'])
     ## extracting the info from dictionaries on `basicData`, `geoData`, `extradata`
+    print('cleaning data')
     df_hotels = pd.concat([df_hotels, df_hotels['basicData'].apply(pd.Series), df_hotels['geoData'].apply(pd.Series), df_hotels['extradata'].apply(pd.Series)], axis = 1)
     item = df_hotels['item'].apply(pd.Series)#['categoria'].apply(pd.Series)
     ## getting `cat1_num`, `cod1_txt``
@@ -33,6 +36,9 @@ def extractHotels():
     ## nerging all slices
     df_hotels = pd.concat([df_hotels, cat1_num, cod1_txt, cat2_num, cod2_txt, cat3_num, cod3_txt], axis = 1)
     df_hotels.drop(['basicData', 'geoData', 'multimedia', 'extradata', 'item', 'categorias'], axis = 1, inplace = True)
+    print('saving the output')
+    with open(f'../data/ayto_madrid/ayto_madrid_hotels.pickle', 'wb') as f:
+        pickle.dump(df_hotels, f)
     return df_hotels
 
 def censoLocalesTerrazas(year, month):
@@ -48,6 +54,7 @@ def censoLocalesTerrazas(year, month):
         df_licencia -> returns a dataframe with the historic census of premises
     """
     # actividades
+    print('calling API')
     url_actividades = f'https://datos.madrid.es/datosabiertos/CIUAB/CENSO/ACTIVIDADECONOMICA/{year}/{month}/actividadeconomica{year}{month}.json'
     res_actividades = requests.get(url_actividades)
     df_actividades = pd.DataFrame(res_actividades.json())
@@ -63,4 +70,8 @@ def censoLocalesTerrazas(year, month):
     url_licencia = 'https://datos.madrid.es/egob/catalogo/200085-29-censo-locales.json'
     res_licencia = requests.get(url_licencia)
     df_licencia = pd.DataFrame(res_licencia.json())
+    for file in ['df_actividades', 'df_local', 'df_terrazas', 'df_licencia']:
+        print(f'saving the output for {file}')
+        with open(f'../data/ayto_madrid/ayto_madrid_{file}.pickle', 'wb') as f:
+            pickle.dump(file, f)
     return df_actividades, df_local, df_terrazas, df_licencia
