@@ -42,7 +42,7 @@ def geolocation(df, column):
         clear_output(wait=True)
         pass
     # 3 - create longitude, laatitude and altitude from location column (returns tuple)
-    df['point'] = df['location'].progress_apply(lambda loc: tuple(loc.point) if loc else None)
+    df['point'] = df['location'].progress_apply(lambda loc: tuple(loc.point) if loc else (None, None, None))
     # 4 - split point column into latitude, longitude
     df[['latitude', 'longitude', 'altitude']] = pd.DataFrame(df['point'].tolist(), index=df.index)
     clear_output(wait=True)
