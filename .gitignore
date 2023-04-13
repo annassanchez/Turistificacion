@@ -137,3 +137,5 @@ airbnb_airdna/
 
 # ignore unused crawler
 sc_fotocasa/
+tutorial/
+crawler_tripadvisor_/
