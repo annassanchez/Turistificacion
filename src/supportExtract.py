@@ -70,8 +70,8 @@ def censoLocalesTerrazas(year, month):
     url_licencia = 'https://datos.madrid.es/egob/catalogo/200085-29-censo-locales.json'
     res_licencia = requests.get(url_licencia)
     df_licencia = pd.DataFrame(res_licencia.json())
-    for file in ['df_actividades', 'df_local', 'df_terrazas', 'df_licencia']:
-        print(f'saving the output for {file}')
-        with open(f'../data/ayto_madrid/ayto_madrid_{file}.pickle', 'wb') as f:
+    for filename, file in zip(['df_actividades', 'df_local', 'df_terrazas', 'df_licencia'], [df_actividades, df_local, df_terrazas, df_licencia]):
+        print(f'saving the output for {filename}')
+        with open(f'../data/ayto_madrid/ayto_madrid_{filename}.pickle', 'wb') as f:
             pickle.dump(file, f)
     return df_actividades, df_local, df_terrazas, df_licencia
