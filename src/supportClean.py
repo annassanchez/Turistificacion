@@ -5,13 +5,13 @@ import os
 from glob import glob
 import pickle
 import geopandas as gpd
+import pyproj
 
 tqdm.pandas()
 from IPython.display import clear_output
 
 # geolocation
 import geopy
-import geopandas
 from geopy.extra.rate_limiter import RateLimiter
 from functools import partial
 from geopy import Nominatim
@@ -113,3 +113,19 @@ def convertColumnsToNumeric(dataframe):
         except:
             continue 
     return dataframe
+
+def convertCoords(df, xname, yname, init_proj, final_proj):
+    """
+    This is a Python function that takes five arguments:
+        - df: a pandas DataFrame containing two columns with coordinate values.
+        - xname: a string indicating the name of the column containing the x-coordinate value.
+        - yname: a string indicating the name of the column containing the y-coordinate value.
+        - init_proj: an integer representing the EPSG code of the initial projection system.
+        - final_proj: an integer representing the EPSG code of the final projection system.
+    The function uses the PyProj package to transform the input coordinates from the initial to the final projection system. 
+    It returns a pandas DataFrame with two new columns: 'newLong' and 'newLat', which correspond to the transformed longitude and latitude values, respectively.
+    """
+    inProj = pyproj.Proj(init=f'epsg:{init_proj}')
+    outProj = pyproj.Proj(init=f'epsg:{final_proj}')
+    df['longitude'], df['latitude'] = pyproj.transform(inProj, outProj, df[xname], df[yname])
+    return df[['longitude', 'latitude']]
