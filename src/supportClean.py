@@ -3,6 +3,8 @@ import pandas as pd
 from tqdm import tqdm
 import os
 from glob import glob
+import pickle
+import geopandas as gpd
 
 tqdm.pandas()
 from IPython.display import clear_output
@@ -84,3 +86,30 @@ def open_csvs_different_folders(root_folder, filename):
         df_temp = pd.read_csv(file)
         df_list.append(df_temp)
     return pd.concat(df_list, axis = 0).drop_duplicates()
+
+def exportFiles(geodataframe, dataframe, filename):
+    """
+    This is a function called exportFilesthat takes three arguments:
+        - geodataframe: A GeoDataFrame that will be exported as a GeoJSON file with the specified filename and saved in the '/output/geojson' directory.
+        - dataframe: A pandas DataFrame that will be exported as a pickle file with the specified filename and saved in the '/output/pickle' directory.
+        - filename: A string representing the filename for the exported files.
+    The function uses the to_file method from GeoPandas to export the geodataframe as a GeoJSON file with the specified filename and saves it in the '/output/geojson' directory. 
+    It also uses the pickle.dump method from the Python's built-in pickle module to export the dataframe as a pickle file with the specified filename and saves it in the '/output/pickle' directory.
+    """
+    geodataframe.to_file(f'../output/geojson/{filename}.geojson', driver="GeoJSON")  
+    with open(f'../output/pickle/{filename}.pickle', 'wb') as f:
+        pickle.dump(dataframe, f)
+
+def convertColumnsToNumeric(dataframe):
+    """
+    This is a Python function that takes a pandas DataFrame as its only argument. 
+    The function iterates over all columns in the DataFrame and attempts to convert each column to a float data type using the pd.to_numeric method. 
+    If conversion is not possible (e.g., if the column contains non-numeric values such as strings), the function moves on to the next column without raising an error. 
+    The function returns the modified DataFrame with numeric columns.
+    """
+    for column in dataframe.columns:
+        try:
+            dataframe[column] = pd.to_numeric(dataframe[column])
+        except:
+            continue 
+    return dataframe
