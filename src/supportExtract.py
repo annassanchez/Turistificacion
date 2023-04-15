@@ -3,7 +3,10 @@ import requests
 import xmltodict
 import json
 import pickle
+import fiona
+import geopandas as gpd
 pd.set_option('display.max_columns', None)
+from IPython.display import clear_output
 
 def extractHotels():
     """
@@ -75,3 +78,25 @@ def censoLocalesTerrazas(year, month):
         with open(f'../data/ayto_madrid/ayto_madrid_{filename}.pickle', 'wb') as f:
             pickle.dump(file, f)
     return df_actividades, df_local, df_terrazas, df_licencia
+
+def catastroLayers(path):
+    """
+    Function description:
+    This function takes a file path of a geopackage as input and returns a dictionary containing GeoDataFrames for each layer present in the geopackage. 
+    It first uses fiona.listlayers to get a list of layer names in the geopackage and prints that list to the console. 
+    It then initializes an empty dictionary and iterates through the list of layer names obtained from fiona.listlayers. 
+    For each layer, it reads the layer data into a GeoDataFrame using gpd.read_file and adds that GeoDataFrame to the output dictionary using a unique integer key. 
+    Finally, it returns the output dictionary containing GeoDataFrames for all layers in the input geopackage.
+    Input parameter:
+        - path: a string representing the file path of a geopackage
+    Output:
+        - A dictionary where keys are integers and values are GeoDataFrames, each corresponding to a layer in the input geopackage.
+    """
+    layers = fiona.listlayers(path)
+    print(f'the geopackage has layers: {layers}')
+    gdf_dict = {}
+    for i, layer in enumerate(layers):
+        print(f'adding layer {layer} to the output dictionary...')
+        gdf_dict[i] = gpd.read_file(path, layer = layer)
+        print(f'done')
+    return gdf_dict
