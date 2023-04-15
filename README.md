@@ -12,3 +12,5 @@
 ## Toolkit
 - [Catastro Inspire Downloader](https://pypi.org/project/CatastroInspireDownloader/): A Python library that downloads the information related to cadastral parcels and buildings in Spain.
 - [contextily](https://pypi.org/project/contextily/): small python package to retrieve basemaps from the internet. Used for support in geospatial data visualizations.
+- [pyproj](https://pypi.org/project/pyproj/): a python library used for cartographic projections. Used for changing the projection od geodataframes. 
+- [fiona](https://pypi.org/project/Fiona/): Fiona is a python library that streams simple feature data to and from GIS formats like GeoPackage and Shapefile. In this project is mostly used to check what's within a geopackage file.
