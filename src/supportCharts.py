@@ -69,12 +69,10 @@ def chart_categoricas_count(df):
     esta función toma un dataframe y presnta unos histogramas con las variables categóricas
     param: dataframe -> dataframe del que se sacan los gráficos
     """
-    print(f'este chart da la distribución de las variables categóricas')
-    fig, axes = plt.subplots(nrows = 1, ncols = 3, figsize = (30, 10))
-
+    print(f'this chart gives the categorical distribution of the variables')
+    df_cat = df.select_dtypes(include = np.number)
+    fig, axes = plt.subplots(nrows=int(df_cat.shape[1]/2), ncols=int(df_cat.shape[1] / 3), figsize = (10 * df_cat.shape[1] / 2,10 * df_cat.shape[1] / 3))
     axes = axes.flat
-
-    df_cat = df.select_dtypes(include = 'object')#.columns
 
     for i, colum in enumerate(df_cat.columns):
         chart = sns.countplot(
