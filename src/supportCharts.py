@@ -11,6 +11,8 @@ import matplotlib.ticker as ticker
 import seaborn as sns
 plt.rcParams["figure.figsize"] = (10,8)
 from IPython.display import clear_output
+import folium
+import contextily as cx
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -132,3 +134,33 @@ def distribucion_numericas(dataframe):
         axes[i].set_xlabel("")
 
     fig.tight_layout()
+
+def foliumMap(gdf):
+    if gdf.shape[1] < 10000:
+        map1 = folium.Map(
+            location=[40.41694, -3.70361],
+            tiles='cartodbpositron',
+            zoom_start=12,
+        )
+        gdf[gdf['longitude'].isnull() == False].sample(10000).apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
+
+        map1
+    else:
+        gdf = gdf.sample(10000)
+        map1 = folium.Map(
+            location=[40.41694, -3.70361],
+            tiles='cartodbpositron',
+            zoom_start=12,
+        )
+        gdf[gdf['longitude'].isnull() == False].sample(10000).apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
+
+        map1
+        
+def plotMap(gdf, column):
+    if gdf.shape[1] < 10000:
+        ax = gdf.plot(column=column, cmap=None)
+        cx.add_basemap(ax)
+    else:
+        gdf = gdf.sample(10000)
+        ax = gdf.plot(column=column, cmap=None)
+        cx.add_basemap(ax)
