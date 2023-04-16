@@ -144,7 +144,7 @@ def foliumMap(gdf):
         )
         gdf[gdf['longitude'].isnull() == False].sample(10000).apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
 
-        map1
+        return map1
     else:
         gdf = gdf.sample(10000)
         map1 = folium.Map(
@@ -154,7 +154,7 @@ def foliumMap(gdf):
         )
         gdf[gdf['longitude'].isnull() == False].sample(10000).apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
 
-        map1
+        return map1
         
 def plotMap(gdf, column):
     if gdf.shape[1] < 10000:
