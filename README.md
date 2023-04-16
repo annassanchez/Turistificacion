@@ -1,5 +1,16 @@
 # Turistificacion
 
+This project aims to create an updated atlas on Madrid's touristification, based on the analisis done bu the architecture studio 300000 kms. 
+
+## Index
+
+- [cr_tripadvisor](cr_tripadvisor/)
+- [data](data/) -> this folder stores the input data
+- [images](images/)
+- [notebooks](notebooks/)
+- [output](output/)
+- [src](src/)
+
 ## Sources:
 - [catastro](https://www.catastro.minhap.es/webinspire/index.html)
 - [flickr data]()
