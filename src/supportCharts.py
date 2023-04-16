@@ -142,7 +142,7 @@ def foliumMap(gdf):
             tiles='cartodbpositron',
             zoom_start=12,
         )
-        gdf[gdf['longitude'].isnull() == False].sample(10000).apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
+        gdf[gdf['longitude'].isnull() == False].apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
 
         return map1
     else:
@@ -152,7 +152,7 @@ def foliumMap(gdf):
             tiles='cartodbpositron',
             zoom_start=12,
         )
-        gdf[gdf['longitude'].isnull() == False].sample(10000).apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
+        gdf[gdf['longitude'].isnull() == False].apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
 
         return map1
         
