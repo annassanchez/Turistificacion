@@ -506,10 +506,10 @@ cadastral_typology = {
 }
 
 tripadvisor_priceRange = {
-    '€':0,
-    '€€':1,
-    '€€€':2,
-    '€€€€':3
+    '€':'tp_pricerange_0',
+    '€€':'tp_pricerange_1',
+    '€€€':'tp_pricerange_2',
+    '€€€€':'tp_pricerange_3'
 }
 
 h3_operations = {'conditionOfConstruction_clean_hotels' : np.mean, 
@@ -536,3 +536,5 @@ h3_operations = {'conditionOfConstruction_clean_hotels' : np.mean,
                  'supersbig':np.sum,	
                  'vacios':np.sum
 }
+
+tripadvisor_priceRange
