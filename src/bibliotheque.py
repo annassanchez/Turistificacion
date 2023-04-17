@@ -487,3 +487,20 @@ desc_epigrafe_en = {
     'ELABORACION Y ENVASADO DE HUEVOS':'desconocidos',
     'CENTROS DE CUIDADO INFANTIL DE ASISTENCIA ESPORADICA':'educacion'
     }
+
+cadastral_construction_state = {
+    'functional':10,
+    '-':0,
+    'declined':2,
+    'ruin':1,
+}
+
+cadastral_typology = {
+    '1_residential':'houses',
+    '3_industrial':'industrial',
+    '4_2_retail':'retail',
+    '4_3_publicServices':'publicServices',
+    '4_1_office':'office',
+    '5_1_hotels':'hotels',
+    '2_agriculture':'agriculture'
+}
