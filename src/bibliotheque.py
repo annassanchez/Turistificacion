@@ -504,3 +504,10 @@ cadastral_typology = {
     '5_1_hotels':'hotels',
     '2_agriculture':'agriculture'
 }
+
+tripadvisor_priceRange = {
+    '€':0,
+    '€€':1,
+    '€€€':2,
+    '€€€€':3
+}
