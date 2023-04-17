@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import math
+import geopandas as gpd
 
 #display
 from IPython.display import display
@@ -135,27 +136,32 @@ def distribucion_numericas(dataframe):
 
     fig.tight_layout()
 
-def foliumMap(gdf):
-    if gdf.shape[1] < 10000:
-        map1 = folium.Map(
+def foliumMap(gdf, map_type):
+    map1 = folium.Map(
             location=[40.41694, -3.70361],
             tiles='cartodbpositron',
             zoom_start=12,
         )
-        gdf[gdf['longitude'].isnull() == False].apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
-
+    if map_type == 'points':
+        if gdf.shape[1] < 10000:
+            gdf[gdf['longitude'].isnull() == False].apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
+            return map1
+        else:
+            gdf[gdf['longitude'].isnull() == False].apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
+            return map1
+    elif map_type == 'polygon':
+        for _, r in gdf.iterrows():
+            sim_geo = gpd.GeoSeries(r['geometry'])
+            geo_j = sim_geo.to_json()
+            geo_j = folium.GeoJson(data=geo_j,
+                                style_function=lambda x: {'fillColor': 'orange'})
+            try:
+                folium.Popup(r['name']).add_to(geo_j)
+            except:
+                pass
+            geo_j.add_to(map1)
         return map1
-    else:
-        gdf = gdf.sample(10000)
-        map1 = folium.Map(
-            location=[40.41694, -3.70361],
-            tiles='cartodbpositron',
-            zoom_start=12,
-        )
-        gdf[gdf['longitude'].isnull() == False].apply(lambda row:folium.CircleMarker(location=[row["latitude"], row["longitude"]]).add_to(map1), axis=1)
-
-        return map1
-        
+    
 def plotMap(gdf, column):
     if gdf.shape[1] < 10000:
         ax = gdf.plot(column=column, cmap=None)

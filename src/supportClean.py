@@ -87,6 +87,59 @@ def open_csvs_different_folders(root_folder, filename):
         df_list.append(df_temp)
     return pd.concat(df_list, axis = 0).drop_duplicates()
 
+def openMultiplePickles(path):
+    """
+    Description: This function loads multiple pickled pandas DataFrames from a directory, concatenates them into one DataFrame, and resets its index.
+    Input:
+        - path (str): the path to the directory containing the pickle files.
+    Output:
+        - pd.DataFrame: concatenated DataFrame of all the loaded pickle files.
+    Steps:
+        - Lists all files in the given directory.
+        - Filters out any non-pickle files by checking the file extension.
+        - Iterates through each pickle file and opens it.
+        - Loads the contents of each pickle file as a dictionary using pickle.load().
+        - Converts the dictionary into a pandas DataFrame and appends it to a list.
+        - Concatenates all DataFrames in the list into a single DataFrame using pd.concat().
+        - Resets the index of the resulting DataFrame using reset_index().
+    """
+    files = os.listdir(path)
+    files = [f for f in files if f[-6:] == 'pickle']
+    list_dicts = []
+    for file in files:
+        with open(f'{path}{file}', 'rb') as dict_scrapped:
+            dict_scrapped = pickle.load(dict_scrapped)
+            list_dicts.append(pd.DataFrame(dict_scrapped))
+    return pd.concat(list_dicts).reset_index(drop=True)
+
+def openMultipleGeospatial(path):
+    """
+    Parameters:
+        - path: A string representing the path to a directory containing one or more geospatial files in GeoJSON format.
+    Returns:
+        - A GeoPandas DataFrame that combines all the GeoJSON files in the specified directory. 
+        For each file, it loads the file into a GeoPandas DataFrame and converts the coordinate reference system (CRS) to EPSG:4326 before concatenating it with other GeoDataFrames. 
+        If a file cannot be loaded, it skips that file.
+    Functionality:
+        - This function takes the path to a directory containing one or more GeoJSON files as input. 
+        It loops through all the files in the directory and loads each file into a GeoPandas DataFrame. 
+        It then converts the CRS of each DataFrame to EPSG:4326. 
+        Finally, it concatenates all the GeoDataFrames into a single GeoPandas DataFrame and returns it. 
+        If a file cannot be loaded, it is skipped. During the loading process, the function prints a message indicating which file is being loaded.
+    """
+    geojson_dict = {}
+    for i, file in enumerate(os.listdir(path)):
+        try:
+            print('loading .geojson file:', file)
+            geojson_dict[i] = gpd.read_file(os.path.join(path, file)).to_crs(epsg=4326)
+        except:
+            pass
+    if not geojson_dict:
+        return 'No valid files found.'
+    else:
+        print('all files are appended')
+        return pd.concat(geojson_dict.values(), axis=0)
+
 def exportFiles(geodataframe, dataframe, filename):
     """
     This is a function called exportFilesthat takes three arguments:
