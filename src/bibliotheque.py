@@ -511,3 +511,28 @@ tripadvisor_priceRange = {
     '€€€':2,
     '€€€€':3
 }
+
+h3_operations = {'conditionOfConstruction_clean_hotels' : np.mean, 
+                 'conditionOfConstruction_clean_houses':np.mean,
+                 'parcs_hotels':np.sum, 
+                 'parcs_houses':np.sum,	
+                 'srf_hotels':np.sum,	
+                 'srf_houses':np.sum,
+                 'agrupaciones':np.sum,
+                 'alcohol':np.sum,	
+                 'alojamiento':np.sum,	
+                 'alquillercoche':np.sum,	
+                 'desconocidos':np.sum,
+                 'educacion':np.sum,	
+                 'fiesta':np.sum,	
+                 'locutoris':np.sum,
+                 'noalim':np.sum,	
+                 'pastelerias':np.sum,	
+                 'prox_fresco':np.sum,
+                 'restaurants':np.sum,	
+                 'sex':np.sum,	
+                 'shops24h':np.sum,	
+                 'supers':np.sum,	
+                 'supersbig':np.sum,	
+                 'vacios':np.sum
+}
