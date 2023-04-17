@@ -536,5 +536,3 @@ h3_operations = {'conditionOfConstruction_clean_hotels' : np.mean,
                  'supersbig':np.sum,	
                  'vacios':np.sum
 }
-
-tripadvisor_priceRange
