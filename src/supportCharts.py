@@ -164,9 +164,9 @@ def foliumMap(gdf, map_type):
     
 def plotMap(gdf, column):
     if gdf.shape[1] < 10000:
-        ax = gdf.plot(column=column, cmap=None)
+        ax = gdf.to_crs(epsg=3857).plot(column=column, cmap=None)
         cx.add_basemap(ax)
     else:
         gdf = gdf.sample(10000)
-        ax = gdf.plot(column=column, cmap=None)
+        ax = gdf.to_crs(epsg=3857).plot(column=column, cmap=None)
         cx.add_basemap(ax)
