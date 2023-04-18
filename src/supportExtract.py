@@ -7,6 +7,7 @@ import fiona
 import geopandas as gpd
 pd.set_option('display.max_columns', None)
 from IPython.display import clear_output
+import src.bibliotheque as bb
 
 def extractHotels():
     """
@@ -100,6 +101,43 @@ def catastroLayers(path):
         gdf_dict[i] = gpd.read_file(path, layer = layer)
         print(f'done')
     return gdf_dict
+
+def openJSONandGetH3():
+    print('...opening airbnb...')
+    gdf_airbnb = (gpd.read_file('../output/geojson/airbnb.geojson')
+            .assign(count=1)
+            .h3.geo_to_h3_aggregate(10, 
+                                    operation = bb.airbnb_operation, 
+                                    lat_col = 'latitude', lng_col = 'longitude'))
+    print('done!')
+    print('...opening fotocasa...')
+    gdf_fotocasa = (gpd.read_file('../output/geojson/fotocasa.geojson')
+            .assign(count=1)
+            .h3.geo_to_h3_aggregate(10, 
+                                    operation = bb.fotocasa_operation, 
+                                    lat_col = 'latitude', lng_col = 'longitude'))
+    print('done!')
+    print('...opening catastro...')
+    gdf_catastro = (gpd.read_file('../output/geojson/catastro.geojson')
+            .assign(count=1)
+            .h3.geo_to_h3_aggregate(10, 
+                                    operation = bb.catastro_operation, 
+                                    lat_col = 'latitude', lng_col = 'longitude'))
+    print('done!')
+    print('...opening locales...')
+    gdf_locales = (gpd.read_file('../output/geojson/locales.geojson')
+            .assign(count=1)
+            .h3.geo_to_h3_aggregate(10, 
+                                    operation = bb.locales_operation, 
+                                    lat_col = 'latitude', lng_col = 'longitude'))
+    print('done!')
+    print('...opening tripadvisor...')
+    gdf_tripadvisor = (gpd.read_file('../output/geojson/tripadvisor.geojson')
+            .assign(count=1)
+            .h3.geo_to_h3_aggregate(10, 
+                                    operation = bb.tripadvisor_operation, 
+                                    lat_col = 'latitude', lng_col = 'longitude'))
+    return pd.concat([gdf_airbnb, gdf_fotocasa, gdf_catastro, gdf_locales, gdf_tripadvisor], axis = 0)
 
 def importDatasets():
     df_2017 = gpd.read_file('../output/grid_2017.geojson').to_crs(epsg=4326)
