@@ -140,6 +140,6 @@ sc_fotocasa/
 tutorial/
 crawler_tripadvisor_/
 h3_test.ipynb
-output/
+output/pickle/
 data/
 fotocasa/
