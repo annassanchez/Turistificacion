@@ -100,3 +100,16 @@ def catastroLayers(path):
         gdf_dict[i] = gpd.read_file(path, layer = layer)
         print(f'done')
     return gdf_dict
+
+def importDatasets():
+    df_2017 = gpd.read_file('../output/grid_2017.geojson').to_crs(epsg=4326)
+
+    neighborhoods = gpd.read_file('../data/airbnb_airdna/2022_06_07/neighbourhoods.geojson').to_crs(epsg=4326)
+
+    df_2023 = gpd.read_file('../output/grid_2023.geojson').to_crs(epsg=4326)
+
+    gdf_2023 = neighborhoods.sjoin(df_2023, how="left")
+
+    gdf_2017 = neighborhoods.sjoin(df_2017, how="left")
+
+    return gdf_2017, gdf_2023
