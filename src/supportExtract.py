@@ -8,6 +8,7 @@ import geopandas as gpd
 pd.set_option('display.max_columns', None)
 from IPython.display import clear_output
 import src.bibliotheque as bb
+import src.supportClean as sc
 
 def extractHotels():
     """
@@ -137,7 +138,29 @@ def openJSONandGetH3():
             .h3.geo_to_h3_aggregate(10, 
                                     operation = bb.tripadvisor_operation, 
                                     lat_col = 'latitude', lng_col = 'longitude'))
-    return pd.concat([gdf_airbnb, gdf_fotocasa, gdf_catastro, gdf_locales, gdf_tripadvisor], axis = 0)
+    gdf = pd.concat([gdf_airbnb, gdf_fotocasa, gdf_catastro, gdf_locales, gdf_tripadvisor], axis = 0)
+    gdf['longitude'] = gdf.centroid.x  
+    gdf['latitude'] = gdf.centroid.y
+    gdf = gdf.rename(bb.rename_dict, axis = 1)
+    gdf['resi_vs_p2p'] = gdf['abnb_tot_price'].astype(float) / gdf['rn_fc_tot_price'].astype(float) 
+    return gdf
+
+def gridInputandH3():
+    df_2017 = pd.read_csv('../data/grid.csv')
+    df_2017_25830 = df_2017[df_2017['h_web'].isnull() == True]
+    df_2017_25830[['latitude', 'longitude']] = sc.convertCoords(df_2017[df_2017['h_web'].isnull() == True], 'X', 'Y', 25830, 4326)
+    df_2017_4326 = df_2017[df_2017['h_web'].isnull() == False]
+    df_2017_4326[['latitude', 'longitude']] = df_2017_4326[['X', 'Y']]
+    df_2017_fixed = pd.concat([df_2017_25830, df_2017_4326], axis = 0)
+    df_2017_fixed['resi_vs_p2p'] = df_2017_fixed['abnb_tot_price'] / df_2017_fixed['rn_fc_tot_price']
+    neighborhoods = gpd.read_file('../data/airbnb_airdna/2022_06_07/neighbourhoods.geojson').to_crs(epsg=4326)
+    return df_2017_fixed.h3.geo_to_h3(resolution=10, lat_col = 'longitude', lng_col = 'latitude').h3.h3_to_geo_boundary(), neighborhoods
+
+def neighborhoodsGridLivingConditions(neighborhoods, grid):
+    df = neighborhoods.sjoin(grid, how="left").groupby(['neighbourhood']).agg(bb.groupby_agroupations_livingConditions)
+    df['abnb_tot_price'] = df['abnb_tot_price'] * 30
+    df['resi_vs_p2p'] = df['abnb_tot_price'].astype(float) / df['rn_fc_tot_price'].astype(float) 
+    return df.merge(neighborhoods, on='neighbourhood')
 
 def importDatasets():
     df_2017 = gpd.read_file('../output/grid_2017.geojson').to_crs(epsg=4326)
