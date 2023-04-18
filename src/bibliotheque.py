@@ -563,12 +563,98 @@ h3_operations = {'conditionOfConstruction_clean_hotels' : np.mean,
                  'number_of_reviews':np.sum,
                  'id':'count',
                  'reviews_per_month':np.sum,
+}
 
+catastro_operation = {
+    'conditionOfConstruction_clean_hotels' : np.mean, 
+    'conditionOfConstruction_clean_houses':np.mean,
+    'parcs_hotels':np.sum, 
+    'parcs_houses':np.sum,	
+    'srf_hotels':np.sum,	
+    'srf_houses':np.sum,
+}
+
+fotocasa_operation = {
+    'name_clean':'count',
+    'min_price_fc':np.min,
+    'max_price_fc':np.max,
+    'med_price_fc':np.median,
+    'price_clean_fc':np.sum,
+}
+
+airbnb_operation = {
+    'host_listings_count':np.sum,       
+    'beds':np.sum,
+    'abnb_tot_price':np.mean,
+    'number_of_reviews':np.sum,
+    'id':'count',
+    'reviews_per_month':np.sum,
+}
+
+locales_operation = {
+    'agrupaciones':np.sum,
+    'alcohol':np.sum,	
+    'alojamiento':np.sum,	
+    'alquillercoche':np.sum,	
+    'desconocidos':np.sum,
+    'educacion':np.sum,	
+    'fiesta':np.sum,	
+    'locutoris':np.sum,
+    'noalim':np.sum,	
+    'pastelerias':np.sum,	
+    'prox_fresco':np.sum,
+    'restaurants':np.sum,	
+    'sex':np.sum,	
+    'shops24h':np.sum,	
+    'supers':np.sum,	
+    'supersbig':np.sum,	
+    'vacios':np.sum,
+}
+
+locales_operation = {
+    'agrupaciones':np.sum,
+    'alcohol':np.sum,	
+    'alojamiento':np.sum,	
+    'alquillercoche':np.sum,	
+    'desconocidos':np.sum,
+    'educacion':np.sum,	
+    'fiesta':np.sum,	
+    'locutoris':np.sum,
+    'noalim':np.sum,	
+    'pastelerias':np.sum,	
+    'prox_fresco':np.sum,
+    'restaurants':np.sum,	
+    'sex':np.sum,	
+    'shops24h':np.sum,	
+    'supers':np.sum,	
+    'supersbig':np.sum,	
+    'vacios':np.sum,
+}
+
+tripadvisor_operation = {
+    'name':'count',
+    #'avg_PriceRangeNum':np.mean,
+    #'min_PriceRangeNum':np.min,
+    #'max_PriceRangeNum':np.max,
+    #'med_PriceRangeNum':np.median,
+    'tp_pricerange_0':np.sum,
+    'tp_pricerange_1':np.sum,
+    'tp_pricerange_2':np.sum,
+    'tp_pricerange_3':np.sum,
+    #'max_reviews_clean':np.max,
+    #'min_reviews_clean':np.min,
+    #'med_reviews_clean':np.median,
+    #'avg_reviews_clean':np.mean,
+    #'min_rating_clean':np.min,
+    #'max_rating_clean':np.max,
+    #'avg_rating_clean':np.mean,
+    #'med_rating_clean':np.median,
 }
 
 rename_dict = {
+    'price_clean_fc':'rn_fc_tot_price',
     'name_clean':'fc_tot_offer',
-    'id':'airbnb_tot_offer',
+    'id':'abnb_tot_offer',
     'prox_fresco':'local200_n_prox_fresco',
     'supers':'local200_n_prox_supers',
     'noalim':'local200_n_prox_noalim',
@@ -576,12 +662,12 @@ rename_dict = {
     'vacios':'local200_n_vacios',
     'restaurants':'local200_n_restaurants',
     'supersbig':'local200_n_prox_supersbig',
-    'name':'local200_n_restaurants_'
+    'name':'local200_n_restaurants'
 }
 
-groupby_agroupations_livingCOnditions = {
+groupby_agroupations_livingConditions = {
     'fc_tot_offer':np.sum,
-    'airbnb_tot_offer':np.sum,
-    'resi_vs_p2p':np.mean,
-    'abnb_tot_price':np.max
+    'abnb_tot_offer':np.sum,
+    'rn_fc_tot_price':np.mean,
+    'abnb_tot_price':np.mean,
 }
