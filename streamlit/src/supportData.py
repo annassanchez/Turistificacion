@@ -23,5 +23,28 @@ def importDatasets():
 
 def importCompetenciaDelSuelo():
     gdf_2023 = gpd.read_file('../output/maps/grid_competencia_suelo_2023.geojson').to_crs(epsg=4326)
-    gdf_2017 = gpd.read_file('../output/mapped/grid_competencia_suelo_2017.geojson').to_crs(epsg=4326)#[['fc_tot_offer', 'airbnb_tot_offer', 'abnb_tot_price', 'geometry']]
+    gdf_2017 = gpd.read_file('../output/maps/grid_competencia_suelo_2017.geojson').to_crs(epsg=4326)#[['fc_tot_offer', 'airbnb_tot_offer', 'abnb_tot_price', 'geometry']]
     return gdf_2017, gdf_2023
+
+def differenceGrids(grid_2017, grid_2023):
+    df = pd.merge(grid_2017, grid_2023, on='neighbourhood', suffixes= ['_2017', '_2023'])
+    columns_2017 = []
+    for column in df.columns:
+        if '_2017' in column and 'neighbourhood' not in column and 'geometry' not in column:
+            columns_2017.append(column)
+        else:
+            continue
+    columns_2023 = []
+    for column in df.columns:
+        if '_2023' in column and 'neighbourhood' not in column and 'geometry' not in column:
+            columns_2023.append(column)
+        else:
+            continue
+    new_cols = []
+    for i, (old_col, new_col) in enumerate(zip(columns_2017, columns_2023)):
+        new_col_name = f'{old_col}_{i}'
+        new_col_ratio = f'{old_col}_ratio'
+        df[new_col_name] = df[old_col] - df[new_col]
+        df[new_col_ratio] = (df[new_col] - df[old_col]) / df[new_col] 
+        new_cols.append(new_col_name)
+    return df
