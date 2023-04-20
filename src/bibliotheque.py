@@ -657,6 +657,10 @@ rename_dict = {
     'price_clean_fc':'rn_fc_tot_price',
     'name_clean':'fc_tot_offer',
     'id':'abnb_tot_offer',
+    'alcohol':'local200_n_prox_alcohol',
+    'restaurants':'local200_n_restaurants',
+    'fiesta':'local200_n_fiesta',
+    'sex':'local200_n_sex',
     'prox_fresco':'local200_n_prox_fresco',
     'supers':'local200_n_prox_supers',
     'noalim':'local200_n_prox_noalim',
@@ -668,7 +672,7 @@ rename_dict = {
     'cad_tot_houses_houses':'cad_tot_houses',
     'srf_houses':'cad_tot_srf_houses',
     'srf_hotels':'cad_tot_srf_hotels',
-    'host_listings_count':'abnb_tot_hosts_listings'
+    'host_listings_count':'abnb_tot_hosts_listings',
 }
 
 groupby_agroupations_livingConditions = {
@@ -696,4 +700,13 @@ groupby_agroupations_sleep = {
     'abnb_tot_hosts_listings':np.sum,
     'cad_tot_srf_hotels':np.sum,
     'cad_tot_houses':np.sum
+}
+
+groupby_fiesta = {
+    'abnb_tot_offer':np.sum,
+    'local200_n_prox_alcohol':np.sum,
+    'local200_n_restaurants':np.sum,
+    'local200_n_fiesta':np.sum,
+    'local200_n_sex':np.sum,
+    'tp_offers_tot':np.sum,
 }
