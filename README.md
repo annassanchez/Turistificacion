@@ -42,7 +42,7 @@ Run visualization:
 - [**time**](https://docs.python.org/3/library/time.html): this module provides various time-related functions -- in this case, related to scraping to add timers.
 - [**sys**](https://docs.python.org/3/library/sys.html): this library provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.
 - [**warnings**](https://docs.python.org/3/library/warnings.html): this library helps to hide the annoying warnings that python sometimes throws.
-- [**folium**](https://pypi.org/project/folium/): this library allows to represent apping via Leaflet.js on a Jupyter Notebook.
+- [**keplergl**](https://pypi.org/project/keplergl/): A jupyter widget for kepler.gl, an advanced geospatial visualization tool, to render large-scale interactive maps. Used for generating the map visualizations for streamlit.
 - [**matplotlib**](https://pypi.org/project/matplotlib/): Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python. It is mostly used in EDA and map representation.
 - [**seaborn**](https://pypi.org/project/seaborn/): Seaborn is a Python visualization library based on matplotlib. It provides a high-level interface for drawing attractive statistical graphics. It is mostly used for EDA.
 - [**geopy**](https://pypi.org/project/geopy/): this is a python client used for geolocating the hotel listings based on the address, to get the coordinates in order to represent them on the dashboard.
