@@ -1,13 +1,13 @@
-import seaborn as sns
 import pandas as pd
-import matplotlib.pyplot as  plt
 import streamlit as st
-import plotly.express as px
 import numpy as np
 import sys
+import pickle
 #sys.path.append("../")
 import src.supportImages as si
 #sys.path.append("../")
+from streamlit_keplergl import keplergl_static
+from keplergl import KeplerGl
 import src.supportData as sd
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed", page_title='comparison', page_icon="🔮")
@@ -25,44 +25,30 @@ options = st.multiselect(
 col1, col2, col3= st.columns(3)
 
 with col1:
-    # Check if selected option is a valid column name
-    #if options and options[0] in gdf_2023_competencia.columns:
-    #    fig = px.choropleth(data_frame=df_2023_competencia, color=options[0],
-    #                        geojson=gdf_2023_competencia['geometry'],
-    #                        locations="neighbourhood",
-    #                        featureidkey="properties.neighbourhood",
-    #                        center=dict(lat=40.0, lon=-3.72),
-    #                        labels={options[0]: options[0]}
-    #                        )
-    #else:
-    #    st.plotly_chart(fig)
-    #    st.write('Please select a valid option.')
     st.markdown('2023')
     if options and options[0] in gdf_2023_competencia.columns:
-        si.plotMap2023(gdf_2023_competencia, options[0])
-        #st.image(f'images/testMap_{options[0]}_2023.png')
-        st.image(f'images/mapTest_{options[0]}_2023.png')
+        year2 = 2023
+        variable2 = options[0] + '_' + str(year2)
+        with open(f'config/{variable2}.pickle', 'rb') as configuration:
+            config2 = pickle.load(configuration)
+        with open(f'../output/maps/grid_competencia_suelo_{year2}.geojson', 'r') as f:
+            geojson2 = f.read()
+        map_2 = KeplerGl(height=400, data={variable2: geojson2},config=config2)
+        keplergl_static(map_2)
     else:
         st.write('Please select a valid option.')
 
 with col2:
-    # Check if selected option is a valid column name
-    #if options and options[0] in gdf_2023_competencia.columns:
-    #    fig = px.choropleth(data_frame=df_2023_competencia, color=options[0],
-    #                        geojson=gdf_2023_competencia['geometry'],
-    #                        locations="neighbourhood",
-    #                        featureidkey="properties.neighbourhood",
-    #                        center=dict(lat=40.0, lon=-3.72),
-    #                        labels={options[0]: options[0]}
-    #                        )
-    #else:
-    #    st.plotly_chart(fig)
-    #    st.write('Please select a valid option.')
     st.markdown('2017')
     if options and options[0] in gdf_2017_competencia.columns:
-        si.plotMap2017(gdf_2017_competencia, options[0])
-        #st.image(f'images/testMap_{options[0]}_2017.png')
-        st.image(f'images/mapTest_{options[0]}_2017.png')
+        year1 = 2017
+        variable1 = options[0] + '_' + str(year1)
+        with open(f'config/{variable1}.pickle', 'rb') as configuration:
+            config1 = pickle.load(configuration)
+        with open(f'../output/maps/grid_competencia_suelo_{year1}.geojson', 'r') as f:
+            geojson1 = f.read()
+        map_1 = KeplerGl(height=400, data={variable1: geojson1},config=config1)
+        keplergl_static(map_1)
     else:
         st.write('Please select a valid option.')
 
@@ -73,9 +59,6 @@ with col3:
         df['neighbourhood'].tolist(),
         ['Sol'])
     if options and options[0] in gdf_2017_competencia.columns:
-        #st.metric(label=df.loc[df['neighbourhood'] == neighbourhood[0], 'neighbourhood'].iat[0],
-        #        value=np.round(df.loc[df['neighbourhood'] == neighbourhood[0], f'{options[0]}_2023'].iat[0], 2),
-        #        delta=np.round(df.loc[df['neighbourhood'] == neighbourhood[0], f'{options[0]}_2017_ratio'].iat[0]*100, 2))
         col1, col2, col3, col4= st.columns(4)
         with col1:
             st.markdown('fotocasa listings')
@@ -100,9 +83,3 @@ with col3:
         st.dataframe(df.loc[df['neighbourhood'] == neighbourhood[0], ['neighbourhood', f'{options[0]}_2023', f'{options[0]}_2017', f'{options[0]}_2017_ratio']], height=100)
     else:
         st.write('Please select a valid option.')
-    #st.markdown(f'{options[0]}_2023')
-    #st.dataframe(df.loc[df['neighbourhood'] == neighbourhood[0], 'neighbourhood'])
-    #st.dataframe(df.loc[df['neighbourhood'] == neighbourhood[0], f'{options[0]}_2023'])
-    #fig.update_geos(fitbounds="locations", visible=False)
-#fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-#st.plotly_chart(fig)
