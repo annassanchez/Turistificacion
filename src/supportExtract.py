@@ -182,6 +182,11 @@ def neighborhoodsSleep(neighborhoods, grid, date):
     df['date'] = date
     return df.merge(neighborhoods, on='neighbourhood')
 
+def neighborhoodsFiesta(neighborhoods, grid, date):
+    df = neighborhoods.sjoin(grid, how="left").groupby(['neighbourhood']).agg(bb.groupby_fiesta)
+    df['date'] = date
+    return df.merge(neighborhoods, on='neighbourhood')
+
 def importDatasets():
     df_2017 = gpd.read_file('../output/grid_2017.geojson').to_crs(epsg=4326)
 
