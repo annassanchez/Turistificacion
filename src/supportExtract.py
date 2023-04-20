@@ -156,10 +156,30 @@ def gridInputandH3():
     neighborhoods = gpd.read_file('../data/airbnb_airdna/2022_06_07/neighbourhoods.geojson').to_crs(epsg=4326)
     return df_2017_fixed.h3.geo_to_h3(resolution=10, lat_col = 'longitude', lng_col = 'latitude').h3.h3_to_geo_boundary(), neighborhoods
 
-def neighborhoodsGridLivingConditions(neighborhoods, grid):
+def neighborhoodsGridLivingConditions(neighborhoods, grid, date):
+    """
+    Function Name: neighborhoodsGridLivingConditions
+    Description: This function takes in two pandas dataframes, neighborhoodsand & grid, performs a spatial join to combine the two dataframes, calculates two new columns based on existing columns in the resulting dataframe, and returns the combined dataframe.
+    Parameters:
+        - neighborhoods: A pandas dataframe containing information about neighborhoods.
+        - grid: A pandas dataframe containing spatial grid data.
+    Returns:
+        - df: A pandas dataframe containing the combined data from neighborhoods and grid.
+    """
     df = neighborhoods.sjoin(grid, how="left").groupby(['neighbourhood']).agg(bb.groupby_agroupations_livingConditions)
     df['abnb_tot_price'] = df['abnb_tot_price'] * 30
     df['resi_vs_p2p'] = df['abnb_tot_price'].astype(float) / df['rn_fc_tot_price'].astype(float) 
+    df['date'] = date
+    return df.merge(neighborhoods, on='neighbourhood')
+
+def neighborhoodsServices(neighborhoods, grid, date):
+    df = neighborhoods.sjoin(grid, how="left").groupby(['neighbourhood']).agg(bb.groupby_agroupations_services)
+    df['date'] = date
+    return df.merge(neighborhoods, on='neighbourhood')
+
+def neighborhoodsSleep(neighborhoods, grid, date):
+    df = neighborhoods.sjoin(grid, how="left").groupby(['neighbourhood']).agg(bb.groupby_agroupations_sleep)
+    df['date'] = date
     return df.merge(neighborhoods, on='neighbourhood')
 
 def importDatasets():
