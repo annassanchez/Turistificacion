@@ -518,6 +518,7 @@ h3_operations = {'conditionOfConstruction_clean_hotels' : np.mean,
                  'parcs_houses':np.sum,	
                  'srf_hotels':np.sum,	
                  'srf_houses':np.sum,
+                 'cad_tot_houses':np.sum,
                  'agrupaciones':np.sum,
                  'alcohol':np.sum,	
                  'alojamiento':np.sum,	
@@ -572,6 +573,7 @@ catastro_operation = {
     'parcs_houses':np.sum,	
     'srf_hotels':np.sum,	
     'srf_houses':np.sum,
+    'cad_tot_houses_houses':np.sum,
 }
 
 fotocasa_operation = {
@@ -662,7 +664,11 @@ rename_dict = {
     'vacios':'local200_n_vacios',
     'restaurants':'local200_n_restaurants',
     'supersbig':'local200_n_prox_supersbig',
-    'name':'local200_n_restaurants'
+    'name':'tp_offers_tot',
+    'cad_tot_houses_houses':'cad_tot_houses',
+    'srf_houses':'cad_tot_srf_houses',
+    'srf_hotels':'cad_tot_srf_hotels',
+    'host_listings_count':'abnb_tot_hosts_listings'
 }
 
 groupby_agroupations_livingConditions = {
@@ -670,4 +676,24 @@ groupby_agroupations_livingConditions = {
     'abnb_tot_offer':np.sum,
     'rn_fc_tot_price':np.mean,
     'abnb_tot_price':np.mean,
+}
+
+groupby_agroupations_services = {
+    'local200_n_prox_fresco':np.sum,
+    'local200_n_prox_supers':np.sum,
+    'local200_n_prox_noalim':np.sum,
+    'local200_n_prox_educacion':np.sum,
+    'local200_n_vacios':np.sum,
+    'local200_n_restaurants':np.sum,
+    'local200_n_prox_supersbig':np.sum,
+    'local200_n_restaurants':np.sum,
+    'tp_offers_tot':np.sum
+}
+
+groupby_agroupations_sleep = {
+    'cad_tot_srf_houses':np.sum,
+    'abnb_tot_offer':np.sum,
+    'abnb_tot_hosts_listings':np.sum,
+    'cad_tot_srf_hotels':np.sum,
+    'cad_tot_houses':np.sum
 }
