@@ -20,7 +20,7 @@ df_2023_competencia = pd.DataFrame(gdf_2023.drop(columns='geometry'))
 options = st.multiselect(
     'Choose a variable to observe',
     gdf_2023.columns.tolist()[1:-3],
-    [])
+    ['abnb_tot_offer'])
 
 #options = options_matched.replace(bb.fiesta)
 
