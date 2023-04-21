@@ -12,7 +12,36 @@ This project is based on the research developed by the architecture studio [300.
 
 Their analysis was based on data gathered around 2017, so the aim is to see if something has changed in the city of Madrid. AirBnB listings are growing? The residential house market has been affected? Where are nightclubs, licquor stores or sex shops located and has COVID affected the location on the city?
 
-I used streamlit to display the difference between the input data from 2017 and the data extracted from 2023. 
+I used streamlit to display the difference between the input data from 2017 and the data extracted from 2023. The variables taken into account for the analyses are:
+
+- airbnb_tot_offer -> the number of listings in AirBnB
+- airbnb_stock -> the number of airbnb listings over the nimber of dwellings.
+- airbnb_tot_price -> the average price of AirBnB listings. 
+- local200_n_sex -> number of sex shop on the area.
+- local200_n_alcohol -> number of licquor stores on the area.
+- locar200_n_restaurants -> number of restaurants in the area.
+- tp_offers_tot -> number of restaurants listed in tripadvisor.
+- local200_n_fiesta -> numberof nightclubs.
+- cad_tot_hotels -> number of building classified as hotels in cadatre.
+- cad_tot_houses -> number of residential buildings.
+
+Also you can filter the insights by the neighborhood.
+
+![general-view](images/general-view.jpeg)
+
+As we see, the center of the city is largely populated by AirBnB's listings and the rest seems to be more vacant. However close to the airport, there seems to be a growing demand of AirBnB listings.
+
+Another variable to mention is the number of bars and night clubs.
+
+![nightclubs](images/nightclubs.jpg)
+
+Before the Covid-19 pandemic, ther north-western and center area of the city seemed to have a bigger amount of nightclubs and bars, however now on the southern area there seems to be a bigger amount. That can be related to the increasing house prices, that seems to be pushing the residents to the southern outskirts -- and maybe also the night life.
+
+I also prepared a visualiation map to see the actual location of the AirBnB listings, aggregated on a 200 sqm hexagon radius, in order to see the distribution of the number of listings in the city.
+
+![general-map](images/map.jpg)
+
+Also the distribution of nightclubs, sex-shops and licquor stores is available to see the detailed of how they are located within the city.
 
 ## Folder structure
 
@@ -85,6 +114,6 @@ Run visualization:
 
 ## Acknowledgements
 
-This project was possible with the help of my teacher [Ana](https://www.linkedin.com/in/ana-garcia-garcia-090a5058?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAxBzWwBZPZEPf67SF_Sml5a7dUrPKlT2BA&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BNLhJzc54Sq2TtZXPk8mNqg%3D%3D), [Cesar](https://www.linkedin.com/in/cesar-valle-iturriaga?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADnW_GcBlDE79-gPyr8h2PlMAlf5J_DWSZQ&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BvICojuuzRV%2BEChVxgxL6Cg%3D%3D) and [Jean-Cha](https://www.linkedin.com/in/jeancharlesyamada?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABrrjKUBJ8xYPKt6ffiDou2_VsEBzBj9p80&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BErY77kNORJeXVe1TZ8quoQ%3D%3D).
+The development of this project was possible with the help of my teacher [Ana](https://www.linkedin.com/in/ana-garcia-garcia-090a5058?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAxBzWwBZPZEPf67SF_Sml5a7dUrPKlT2BA&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BNLhJzc54Sq2TtZXPk8mNqg%3D%3D), [Cesar](https://www.linkedin.com/in/cesar-valle-iturriaga?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADnW_GcBlDE79-gPyr8h2PlMAlf5J_DWSZQ&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BvICojuuzRV%2BEChVxgxL6Cg%3D%3D) and [Jean Cha](https://www.linkedin.com/in/jeancharlesyamada?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABrrjKUBJ8xYPKt6ffiDou2_VsEBzBj9p80&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BErY77kNORJeXVe1TZ8quoQ%3D%3D).
 
 Also feel free to contact me if you see any mistakes or you want to learn more [here](mailto:annassanchez@gmail.com).
