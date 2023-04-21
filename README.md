@@ -8,7 +8,7 @@ Touristification is a project that aims to create an atlas to measure the impact
 
 This project is based on the research developed by the architecture studio [300.000 Km/s](http://turistificacion.300000kms.net/) based on multiple data sources: open statistical data (Catastro, Ayuntamiento de Madrid Open Data Platform) and soft-data (scraped or crawled from Tripadvisor and Airbnb).
 
-![insights](image/insights.jpg)
+![insights](images/insights.jpg)
 
 Their analysis was based on data gathered around 2017, so the aim is to see if something has changed in the city of Madrid. AirBnB listings are growing? The residential house market has been affected? Where are nightclubs, licquor stores or sex shops located and has COVID affected the location on the city?
 
