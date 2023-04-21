@@ -7,6 +7,7 @@ import fiona
 import geopandas as gpd
 pd.set_option('display.max_columns', None)
 from IPython.display import clear_output
+import src.biblio as bb
 
 def importDatasets():
     df_2017 = gpd.read_file('../output/grid_2017.geojson').to_crs(epsg=4326)
@@ -24,6 +25,16 @@ def importDatasets():
 def importCompetenciaDelSuelo():
     gdf_2023 = gpd.read_file('../output/maps/grid_competencia_suelo_2023.geojson').to_crs(epsg=4326)
     gdf_2017 = gpd.read_file('../output/maps/grid_competencia_suelo_2017.geojson').to_crs(epsg=4326)#[['fc_tot_offer', 'airbnb_tot_offer', 'abnb_tot_price', 'geometry']]
+    return gdf_2017, gdf_2023
+
+def importResiVSTouristDwellings():
+    gdf_2023 = gpd.read_file('../output/maps/grid_sleep_2023.geojson').to_crs(epsg=4326)
+    gdf_2017 = gpd.read_file('../output/maps/grid_sleep_2017.geojson').to_crs(epsg=4326)#[['fc_tot_offer', 'airbnb_tot_offer', 'abnb_tot_price', 'geometry']]
+    return gdf_2017, gdf_2023
+
+def importFiesta():
+    gdf_2023 = gpd.read_file('../output/maps/grid_fiesta_2023.geojson').to_crs(epsg=4326)
+    gdf_2017 = gpd.read_file('../output/maps/grid_fiesta_2017.geojson').to_crs(epsg=4326)#[['fc_tot_offer', 'airbnb_tot_offer', 'abnb_tot_price', 'geometry']]
     return gdf_2017, gdf_2023
 
 def differenceGrids(grid_2017, grid_2023):
@@ -48,3 +59,9 @@ def differenceGrids(grid_2017, grid_2023):
         df[new_col_ratio] = (df[new_col] - df[old_col]) / df[new_col] 
         new_cols.append(new_col_name)
     return df
+
+def replaceFunction(string):
+    if string in bb.fiesta:
+        #print(bb.fiesta[key])
+        return bb.fiesta[string]
+    return string
