@@ -12,13 +12,13 @@ st.set_page_config(layout="wide", initial_sidebar_state="collapsed", page_title=
 
 gdf_2017_competencia, gdf_2023_competencia = sd.importCompetenciaDelSuelo()
 
-
-
 col1, col2, col3 = st.columns([1,3,1])
 with col1:
     st.markdown('')
 with col2:
     st.title('Touristification')
+
+    st.image('images/tourists.jpg')
 
     st.markdown("""
         Touristification is a project that aims to create an atlas to measure the impact of tourism in the city of Madrid. 
@@ -34,28 +34,29 @@ with col2:
         )
     with col2:
         st.metric(
-            label='airbnb listings data',
-            value=gpd.read_file('../output/geojson/airbnb.geojson').shape[0]
-        )
-    with col3:
-        st.metric(
-            label='fotocasa listings data',
-            value=gpd.read_file('../output/geojson/fotocasa.geojson').shape[0]
-        )
-    with col4:
-        st.metric(
             label='hotels licenses data',
             value=gpd.read_file('../output/geojson/hotels.geojson').shape[0]
         )
-    with col5:
+        
+    with col3:
         st.metric(
             label='busines premises data',
             value=gpd.read_file('../output/geojson/locales.geojson').shape[0]
         )
-    with col6:
+    with col4:
+        st.metric(
+            label='fotocasa listings data',
+            value=gpd.read_file('../output/geojson/fotocasa.geojson').shape[0]
+        )
+    with col5:
         st.metric(
             label='tripadvisor restaurants data',
             value=gpd.read_file('../output/geojson/tripadvisor.geojson').shape[0]
+        )
+    with col6:
+        st.metric(
+            label='airbnb listings data',
+            value=gpd.read_file('../output/geojson/airbnb.geojson').shape[0]
         )
 with col1:
     st.markdown('')
