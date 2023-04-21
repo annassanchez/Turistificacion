@@ -574,6 +574,7 @@ catastro_operation = {
     'srf_hotels':np.sum,	
     'srf_houses':np.sum,
     'cad_tot_houses_houses':np.sum,
+    'cad_tot_houses_hotels':np.sum,
 }
 
 fotocasa_operation = {
@@ -669,7 +670,9 @@ rename_dict = {
     'restaurants':'local200_n_restaurants',
     'supersbig':'local200_n_prox_supersbig',
     'name':'tp_offers_tot',
+    'cad_tot_houses_hotels':'cad_tot_hotels',
     'cad_tot_houses_houses':'cad_tot_houses',
+    'cad_tot_houses_hotels':'cad_tot_hotels',
     'srf_houses':'cad_tot_srf_houses',
     'srf_hotels':'cad_tot_srf_hotels',
     'host_listings_count':'abnb_tot_hosts_listings',
@@ -709,4 +712,7 @@ groupby_fiesta = {
     'local200_n_fiesta':np.sum,
     'local200_n_sex':np.sum,
     'tp_offers_tot':np.sum,
+    'abnb_tot_price':np.mean,
+    'cad_tot_hotels':np.sum,
+    'cad_tot_houses':np.sum,
 }
