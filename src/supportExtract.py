@@ -184,6 +184,7 @@ def neighborhoodsSleep(neighborhoods, grid, date):
 
 def neighborhoodsFiesta(neighborhoods, grid, date):
     df = neighborhoods.sjoin(grid, how="left").groupby(['neighbourhood']).agg(bb.groupby_fiesta)
+    df['stock_airbnb'] = df['abnb_tot_offer'].astype(float) / df['cad_tot_houses'].astype(float) 
     df['date'] = date
     return df.merge(neighborhoods, on='neighbourhood')
 
