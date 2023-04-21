@@ -6,9 +6,12 @@
 
 Touristification is a project that aims to create an atlas to measure the impact of tourism in the city of Madrid.
 This project is based on the research developed by the architecture studio [300.000 Km/s](http://turistificacion.300000kms.net/) based on multiple data sources: open statistical data (Catastro, Ayuntamiento de Madrid Open Data Platform) and soft-data (scraped or crawled from Tripadvisor and Airbnb).
+
+![insights](images/insights.jpg)
+
 Their analysis was based on data gathered around 2017, so the aim is to see if something has changed in the city of Madrid. AirBnB listings are growing? The residential house market has been affected? Where are nightclubs, licquor stores or sex shops located and has COVID affected the location on the city?
 
-
+I used streamlit to display the difference between the input data from 2017 and the data extracted from 2023. 
 
 ## Folder structure
 
@@ -83,4 +86,4 @@ Run visualization:
 
 This project was possible with the help of my teacher [Ana](https://www.linkedin.com/in/ana-garcia-garcia-090a5058?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAxBzWwBZPZEPf67SF_Sml5a7dUrPKlT2BA&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BNLhJzc54Sq2TtZXPk8mNqg%3D%3D), [Cesar](https://www.linkedin.com/in/cesar-valle-iturriaga?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADnW_GcBlDE79-gPyr8h2PlMAlf5J_DWSZQ&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BvICojuuzRV%2BEChVxgxL6Cg%3D%3D) and [Jean-Cha](https://www.linkedin.com/in/jeancharlesyamada?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABrrjKUBJ8xYPKt6ffiDou2_VsEBzBj9p80&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BErY77kNORJeXVe1TZ8quoQ%3D%3D).
 
-Also fell free to contact me if you see any mistakes or you want to learn more [here](mailto:annassanchez@gmail.com).
+Also feel free to contact me if you see any mistakes or you want to learn more [here](mailto:annassanchez@gmail.com).
